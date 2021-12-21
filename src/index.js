@@ -1,20 +1,22 @@
 
-document.addEventListener('DOMContentLoaded',function(){
+
+document.addEventListener('DOMContentLoaded', () => {
     fetchImages();
     fetchBreeds();
+    dropdown();
 })
 
-function fetchImages(){
+function fetchImages() {
     const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
     fetch(imgUrl)
-    .then(response => response.json())
+    .then(resp => resp.json())
     .then(data => {
         data.message.forEach(url => {
-        const img = document.createElement("img");
-        img.src = url
-        document.querySelector("#dog-image-container").appendChild(img)
+            const img = document.createElement('img')
+            img.src = url;
+            document.querySelector('#dog-image-container').appendChild(img)
+        })
     })
-})
 }
 
 function fetchBreeds(){
@@ -23,13 +25,63 @@ function fetchBreeds(){
     .then(resp => resp.json())
     .then(data => {
         Object.keys(data.message).forEach(breed => {
-            const li = document.createElement("li")
-            const ul = document.getElementById("dog-breeds")
-            li.textContent = breed;
+            const ul = document.querySelector('ul')
+            const li = document.createElement('li')
+                li.textContent = breed;
+                    li.addEventListener('click', (e) => {
+                        li.style.color = "white";
+                    })
+                    
+            ul.appendChild(li)
         })
-        ul.appendChild(li)
     })
 }
+
+// function dropdown () {
+//     const breedUrl = 'https://dog.ceo/api/breeds/list/all'
+//     fetch(breedUrl)
+//     .then(resp => resp.json())
+//     .then(data => {
+//         Object.keys(data.message).forEach(breed => {
+//             const option = document.querySelector("option")
+//             option.textContent = breed;
+//             const optionValue = document.querySelector("value")
+//             optionValue.textContent = breed;
+//         })
+// }
+
+// document.addEventListener('DOMContentLoaded',function(){
+//     fetchImages();
+//     fetchBreeds();
+// })
+
+// function fetchImages(){
+//     const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
+//     fetch(imgUrl)
+//     .then(response => response.json())
+//     .then(data => {
+//         data.message.forEach(url => {
+//         const img = document.createElement("img");
+//         img.src = url
+//         document.querySelector("#dog-image-container").appendChild(img)
+//     })
+// })
+// }
+
+// function fetchBreeds(){
+//     const breedUrl = 'https://dog.ceo/api/breeds/list/all'
+//     fetch(breedUrl)
+//     .then(resp => resp.json())
+//     .then(data => {
+//         Object.keys(data.message).forEach(breed => {
+//             const ul = document.getElementById("dog-breeds")
+//             const li = document.createElement("li")
+//             li.textContent = breed;
+//             ul.appendChild(li)
+//         })
+//     })
+// }
+
 
 
 // document.addEventListener('DOMContentLoaded', function (){
@@ -61,9 +113,9 @@ function fetchBreeds(){
 //             const ul = document.getElementById("dog-breeds")
 //             const li = document.createElement("li")
 //             li.textContent = breed;
-//             // li.addEventListener("click", function(){
-//             //     li.style.color = "white";
-//             // })
+//             li.addEventListener("click", function(){
+//                 li.style.color = "white";
+//             })
 //             ul.appendChild(li)
 //         })
 //     })
